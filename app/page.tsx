@@ -89,7 +89,7 @@ export default function Home() {
         <div className="bg-white rounded-xl shadow-md overflow-hidden mb-6">
           <div className="p-6">
             <div className="flex justify-between items-center mb-6">
-              <h1 className="text-2xl font-bold text-indigo-600">Couch to 5K Guide</h1>
+              <h1 className="text-2xl font-bold text-indigo-600">Couch to 5K Guide!</h1>
               {installPrompt && (
                 <button
                   onClick={installApp}
