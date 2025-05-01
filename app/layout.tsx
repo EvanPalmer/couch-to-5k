@@ -10,12 +10,32 @@ export const metadata: Metadata = {
   description: "A progressive web app to guide you through the Couch to 5K running program",
   manifest: "/manifest.json",
   themeColor: "#4f46e5",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "C25K Guide",
   },
-  generator: 'v0.dev'
+  generator: 'v0.dev',
+  applicationName: "C25K Guide",
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    siteName: "C25K Guide",
+    title: "Couch to 5K Guide",
+    description: "A progressive web app to guide you through the Couch to 5K running program",
+  },
+  twitter: {
+    card: "summary",
+    title: "Couch to 5K Guide",
+    description: "A progressive web app to guide you through the Couch to 5K running program",
+  },
 }
 
 // Register service worker
