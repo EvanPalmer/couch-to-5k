@@ -1,14 +1,16 @@
 "use client"
 
+import { use } from "react"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { ArrowLeft, CheckCircle, Clock, Calendar, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { programData } from "@/lib/program-data"
 
-export default function WeekDetail({ params }: { params: { weekId: string } }) {
+export default function WeekDetail({ params }: { params: Promise<{ weekId: string }> }) {
+  const resolvedParams = use(params)
   const router = useRouter()
-  const weekId = Number.parseInt(params.weekId)
+  const weekId = Number.parseInt(resolvedParams.weekId)
 
   const [program, setProgram] = useState(programData)
   const [isLoading, setIsLoading] = useState(true) // Add a loading state

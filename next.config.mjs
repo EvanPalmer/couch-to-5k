@@ -9,6 +9,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  env: {
+    NEXT_PUBLIC_BUILD_VERSION: Date.now().toString(),
+  },
 }
 
 export default nextConfig

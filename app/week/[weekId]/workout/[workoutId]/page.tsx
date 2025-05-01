@@ -1,17 +1,16 @@
 "use client"
 
-import type React from "react"
-
+import { use } from "react"
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { ArrowLeft, Play, Pause, RotateCcw, CheckCircle, Volume2, VolumeX } from "lucide-react"
 import Link from "next/link"
 import { programData } from "@/lib/program-data"
 
-export default function WorkoutDetail({ params }: { params: { weekId: string; workoutId: string } }) {
-  const router = useRouter()
-  const weekId = Number.parseInt(params.weekId)
-  const workoutId = Number.parseInt(params.workoutId)
+export default function WorkoutDetail({ params }: { params: Promise<{ weekId: string; workoutId: string }> }) {
+  const resolvedParams = use(params)
+  const weekId = Number.parseInt(resolvedParams.weekId)
+  const workoutId = Number.parseInt(resolvedParams.workoutId)
 
   const [program, setProgram] = useState(programData)
   const [isLoading, setIsLoading] = useState(true)
