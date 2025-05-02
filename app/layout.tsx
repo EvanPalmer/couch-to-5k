@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import InstallButton from "./components/InstallButton"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -16,6 +17,20 @@ export const metadata: Metadata = {
   title: "Couch to 5K Guide",
   description: "A progressive web app to guide you through the Couch to 5K running program",
   manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: '/icons/icon-72x72.png', sizes: '72x72', type: 'image/png' },
+      { url: '/icons/icon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/icons/icon-128x128.png', sizes: '128x128', type: 'image/png' },
+      { url: '/icons/icon-144x144.png', sizes: '144x144', type: 'image/png' },
+      { url: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icons/icon-384x384.png', sizes: '384x384', type: 'image/png' },
+      { url: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/icons/icon-180x180.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -58,6 +73,22 @@ if (typeof window !== 'undefined') {
       });
     }
   });
+
+  // Handle install prompt
+  let deferredPrompt: any;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    // Show the install button
+    console.log('Install prompt available');
+  });
+
+  window.addEventListener('appinstalled', () => {
+    console.log('App was installed');
+    deferredPrompt = null;
+  });
 }
 
 export default function RootLayout({
@@ -68,7 +99,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <InstallButton />
+      </body>
     </html>
   )
 }
